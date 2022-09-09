@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  {% load plotly_dash %}
+
+  {% load static %}
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
+    integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
+    integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+</head>
+
+<body>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+    crossorigin="anonymous"></script>
+  <!--navbar section-->
+  <div style="  position: relative;
+  z-index: 4;">
+    <nav class=" nav-it navbar navbar-expand-lg ">
+      <div class="container-fluid">
+        <li  class="navbar-brand nav_item"
+          href="#">About</li>
+        <li style="margin-top: -20px;" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle nav_item " href="#" id="navbarDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Trading
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li onclick="document.getElementById('modal-wrapper').style.display='block'"><a class="dropdown-item"
+                href="#">New Order</a></li>
+            <li onclick="document.getElementById('modal-wrapper1').style.display='block'"><a class="dropdown-item"
+                href="#">Auto Trading</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Stop Tading</a></li>
+          </ul>
+        </li>
+
+        <li style="margin-top: -20px;" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle nav_item " href="#" id="navbarDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Forecasting
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li onclick="Forecast('predict')"><a class="dropdown-item" href="#">Signal Forecasting</a></li>
+            <li onclick= "getNews()"><a class="dropdown-item" href="#">News</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li onclick="Forecast('dont predict')"><a class="dropdown-item" href="#">Stop Signal Forecasting</a></li>
+            <li><a class="dropdown-item" href="#">Stop News</a></li>
+          </ul>
+        </li>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <label style="margin-left: 100px; margin-top: 7px;" class="nav_item" for="">Symbol</label>&nbsp;
+            &nbsp;
+            <li class="nav-item dropdown ">
+
+
+              <select onmouseout="this.style.color = 'white'" class="form-select"
+                style="background: none; color: white;" onclick="changeStyle()" id="Symbol"
+                onchange="grapghParamiters()">
+                <option value="EURUSD">EURUSD</option>
+                <option value="GBPUSD">GBPUSD</option>
+                <option value="USDCHF">USDCHF</option>
+                <option value="USDJPY">USDJPY</option>
+
+              </select>
+            </li>
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            <label style="margin-top: 7px;" class="nav_item" for="">Time Frames</label>&nbsp;&nbsp;&nbsp;
+            <li class="nav-item dropdown">
+              <select onmouseout="this.style.color = 'white'" style="background: none; color: white;"
+                class="form-select" id="timeFrames" onclick="changeStyle1()" onchange="grapghParamiters()">
+                <option value="1 Minute">1 Minute</option>
+                <option value="5 Minute">5 Minute</option>
+                <option value="10 Minute">10 Minute</option>
+                <option value="20 Minute">20 Minute</option>
+                <option value="30 Minute">30 Minute</option>
+                <option value="1 Hour">1 Hour</option>
+                <option value="6 Hours">6 Hours</option>
+                <option value="12 Hours">12 Hours</option>
+                <option value="1 Day">1 Day</option>
+                <option value="1 Week">1 Week</option>
+                <option value="1 Month">1 Month</option>
+              </select>
+            </li>
+          </ul>
+          <div onclick="document.getElementById('modal-wrapper3').style.display='block'" class="d-flex">
+
+            <li style="font-size: medium; margin-top: 5px; " class="navbar-brand nav_item" id="balance"></li>
+            &nbsp;&nbsp;
+            <a style="font-size: medium; margin-top: 5px;  "  id="login" class="navbar-brand nav_item" href="#">Login</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!--end navbar section-->
+  <div class="siteTitle">
+    <h2>Currency Price <br> &nbsp; &nbsp; Changes Forecasting</h2>
+
+  </div>
+  <div class="priceTable">
+    <table style=" margin-top: 60px;" id="t01">
+      <tr>
+        <th>Symbol</th>
+        <th>BID</th>
+        <th>ASK</th>
+      </tr>
+      <tr>
+        <td class="syname">EURUSD</td>
+        <td id="EURUSD_BID"></td>
+        <td id="EURUSD_ASK"></td>
+
+      </tr>
+      <tr>
+        <td class="syname">GBPUSD</td>
+        <td id="GBPUSD_BID"></td>
+        <td id="GBPUSD_ASK"></td>
+
+      </tr>
+      <tr>
+        <td class="syname">USDCHF</td>
+        <td id="USDCHF_BID"></td>
+        <td id="USDCHF_ASK"></td>
+
+      </tr>
+      <tr>
+        <td class="syname">USDJPY</td>
+        <td id="USDJPY_BID"></td>
+        <td id="USDJPY_ASK"></td>
+
+      </tr>
+    </table>
+  </div>
+  <!--getprice section-->
+  <div style="    height: 20px;
+  width: 1030px;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  top: 100px;
+  z-index: 2;
+  left: 300px;"></div>
+  <div style="    height: 200px;
+    width: 20px;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top: 100px;
+    z-index: 2;
+    left: 300px;"></div>
+  <div style="    height: 500px;
+        width: 75px;
+        background-color: rgb(255, 255, 255);
+        position: absolute;
+        top: 100px;
+        z-index: 2;
+        left: 1295px;"></div>
+  <div style='width: 75%; margin-top: -360px; margin-left: 300px; height: 200px;' class='priceGraph'>
+    <div  style='height: 100%; width: 100%'>
+      {% plotly_app name='SimpleExample' ratio=0.45 %}
+    </div>
+    <br>
+    {{ plot1 | safe }}
+
+  </div>
+ 
+  <div id="modal-wrapper" class="modal">
+
+    <form style="width: 550px; height : 500px;" class="modal-content animate">
+      <div style="           border-style: groove;
+         border-width: 2px;
+         margin-left: 495px;
+         width: 50px;
+         height: 50px;
+         position: absolute;
+         z-index: 3;
+         border-right: none;
+         border-top: none;
+         margin-top: 5px;">
+
+        <span style="    width: 50px;
+        
+        width: 10;
+        margin-top: 20px;
+        " onclick="document.getElementById('modal-wrapper').style.display='none'" class="close"
+          title="Close PopUp">&times;</span>
+
+      </div>
+
+
+      <div style="width: 550px;" class="container">
+        <h3 style="padding-top: 10px;">New Order</h3>
+        <div class="cont">
+
+          <label for="symbols">Choose a Symbol:</label>
+          <select name="symbols" id="symbols">
+            <option value="EURUSD">EURUSD, Euro vs US Dollar</option>
+            <option value="USDCHF">USDCHF, US Dollar vs Swiss Franc</option>
+            <option value="USDJPY">USDJPY, US Dollar vs Yen</option>
+            <option value="GBPUSD">GBPUSD, Pound Sterling vs US Dollar </option>
+          </select>
+          <br><br><br>
+
+          <label for="Volume">Volume</label>
+          <input placeholder="0.00" type="number" id="Volume" step="0.01">
+          <br><br>
+          <label class="" for="stop_loss">Stop Loss</label>
+          <input class="profit1" placeholder="0.00" id="stop_loss" type="text" step="0.01">
+          <label class="profit" for=" take_profit"> Take Profit</label>
+          <input class="profit1" id="take_profit" placeholder="0.00" type="text" step="0.01">
+          <br><br><br>
+          <label class="" for="Deviation">Deviation</label>
+          <select name="" id="Deviation">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
+          <br><br><br>
+          <button onclick="newOrder('sell')" type="button" class="order_btn btn btn-danger">Sell</button>
+          <button onclick="newOrder('buy')" style="margin-left: 20px;" type="button"
+            class="order_btn btn btn-primary">Buy</button>
+
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <div style="margin-top: -25px;" id="modal-wrapper1" class="modal">
+
+    <form style="width: 550px; height : 550px;" class="modal-content animate">
+      <div style="           border-style: groove;
+           border-width: 2px;
+           margin-left: 495px;
+           width: 50px;
+           height: 50px;
+           position: absolute;
+           z-index: 3;
+           border-right: none;
+           border-top: none;
+           margin-top: 5px;">
+
+        <span style="    width: 50px;
+          
+          width: 10;
+          margin-top: 20px;
+          " onclick="document.getElementById('modal-wrapper1').style.display='none'" class="close"
+          title="Close PopUp">&times;</span>
+
+      </div>
+
+
+      <div style="width: 550px; " class="container">
+        <h3 style="padding-top: 10px;">Auto Trade</h3>
+        <div class="cont1">
+          <label for="symbols">Choose the Period:</label>
+          <select name="symbols" id="symbols">
+            <option value="EURUSD">Hour</option>
+            <option value="USDCHF">3 Hours</option>
+            <option value="USDJPY">Day</option>
+            <option value="GBPUSD">3 Days</option>
+            <option value="GBPUSD">Deek</option>
+            <option value="GBPUSD">2 Weeks</option>
+            <option value="GBPUSD">Month</option>
+          </select>
+          <br><br><br>
+
+          <label for="auto_symbols">Choose a Symbol:</label>
+          <select name="auto_symbols" id="auto_symbols">
+            <option value="EURUSD">EURUSD, Euro vs US Dollar</option>
+            <option value="USDCHF">USDCHF, US Dollar vs Swiss Franc</option>
+            <option value="USDJPY">USDJPY, US Dollar vs Yen</option>
+            <option value="GBPUSD">GBPUSD, Pound Sterling vs US Dollar </option>
+            <option value="all">All </option>
+          </select>
+          <br><br><br>
+
+          <label for="Volume">Volume</label>
+          <input placeholder="0.00" type="number" id="auto_Volume" step="0.01">
+          <br><br>
+          <label class="" for="auto_stop_loss">Stop Loss</label>
+          <input class="profit1" placeholder="0.00" id="auto_stop_loss" type="text" step="0.01">
+          <label class="profit" for=" auto_take_profit"> Take Profit</label>
+          <input class="profit1" id="auto_take_profit" placeholder="0.00" type="text" step="0.01">
+          <br><br><br>
+          <label class="" for="auto_Deviation">Deviation</label>
+          <select name="" id="auto_Deviation">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
+          <br><br>
+          <button onclick="AutoTrade()" style="margin-left: 90px;
+          background-color: rgb(158, 32, 32);" type="button" class="order_btn btn btn-primary">Ok</button>
+
+        </div>
+      </div>
+    </form>
+    <div id="outerdiv"></div>
+  </div>
+
+
+
+
+
+
+  <div style="margin-top: -25px;" id="modal-wrapper2" class="modal">
+
+    <form style="width: 550px; height : 550px;" class="modal-content animate">
+      <div style="           border-style: groove;
+           border-width: 2px;
+           margin-left: 495px;
+           width: 50px;
+           height: 50px;
+           position: absolute;
+           z-index: 3;
+           border-right: none;
+           border-top: none;
+           margin-top: 5px;">
+
+        <span style="    width: 50px;
+          
+          width: 10;
+          margin-top: 20px;
+          " onclick="document.getElementById('modal-wrapper2').style.display='none'" class="close"
+          title="Close PopUp">&times;</span>
+
+      </div>
+
+
+      <div style="width: 550px; " class="container">
+        <h3 style="padding-top: 10px;">New Business</h3>
+        <div class="cont1">
+
+          <div style="width: 65%;
+background-color: rgba(0, 0, 0, 0.8);
+height: 50px;    margin-top: -10px;
+margin-left: 175px; color: white;font-size: smaller;">
+            <p style="margin-left: 10px;"> Welcome to New Business System <br> Let me Help you to Chosse a New Business
+              <br>
+            </p>
+            <br>
+          </div>
+
+          <div style="width: 65%;
+background-color: rgba(0, 0, 0, 0.8);
+height: 50px;    margin-top: 5px;
+margin-left: 175px; color: white; font-size: smaller;">
+            <p style="margin-left: 10px;"> Tell me Where do you Want to Start the Project ? <br>
+            </p>
+            <div style="margin-left: 10px;
+ margin-top: -15px;">
+              <div style="margin-top: -20px;">
+                <table>
+                  <tr>
+                    <td style="color: rgb(0, 64, 255); margin-left: 10px;">Syria</td>
+                    <td style="color: rgb(0, 64, 255); margin-left: 10px;">Egypt</td>
+                    <td style="color: rgb(0, 64, 255); margin-left: 10px;">UAE</td>
+                    <td style="color: rgb(0, 64, 255); margin-left: 10px;">Dubai</td>
+                  </tr>
+                </table>
+
+                <p style="color: royalblue; margin-left: 10px;"></p>
+                <p style="color: royalblue; margin-left: 10px;"></p>
+                <p style="color: royalblue; margin-left: 10px;"></p>
+              </div>
+
+
+
+            </div>
+          </div>
+
+          <div style="    margin-left: -40px;
+margin-top: 277px;">
+            <button onclick="AutoTrade()" style=" 
+background-color: rgb(158, 32, 32);
+width: 100px; position: absolute;
+top: 495px;
+left: 15px;" type="button" class="order_btn btn btn-primary">Send</button>
+            <input style="    position: absolute;
+            top: 497px;
+            left: 135px;
+            height: 35px;
+            width: 395px;" type="text" name="" id="">
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+  {% csrf_token %}
+  <!--end services section-->
+  <div style="margin-top: 50px;" id="modal-wrapper3" class="modal">
+    <form style="width: 440px; height : 420px;" class="modal-content animate">
+      <div style="           border-style: groove;
+         border-width: 2px;
+         margin-left: 395px;
+         width: 40px;
+         height: 40px;
+         position: absolute;
+         z-index: 3;
+         border-right: none;
+         border-top: none;
+         margin-top: 5px;">
+        <span style="width: 45px;       
+        width: 10;
+        margin-top: 20px;
+        margin-left: 15px;
+        " onclick="document.getElementById('modal-wrapper3').style.display='none'" class="close"
+          title="Close PopUp">&times;</span>
+
+      </div>
+      <div style="width: 440px;" class="container">
+        <h3 style="padding-top: 10px;">Login</h3>
+        <div style="height: 320px;" class="cont">
+          <div class="md-form mb-5">
+            <i class="fas fa-user prefix grey-text"></i>
+            <input id="username" type="text" class="input_std" placeholder="Username">
+          </div>
+          <div class="md-form mb-5">
+            <i class="fas fa-envelope prefix grey-text"></i>
+            <input type="password" id="password" class="input_std" placeholder=" Password">
+          </div>
+          <br><br>
+          <button onclick="Login()"
+            style="margin-left: 20px; background-color: rgb(158, 32, 32); border-style: solid; border-color: black; border-width: thin;margin-left: 40px;"
+            type="button" class="order_btn btn btn-primary">Login</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div style="width: 100%;z-index:4;margin-top: 240px; display: none; "  id="table-wrapper">
+    <div id="table-scroll">
+      <table style="margin-top: -7px;" id="NewsTable">
+        <thead>
+          <tr>
+            <th style="padding: 6px; color: white;">Currency</th>
+            <th style="padding: 6px;color: white;">Event</th>
+            <th style="padding: 6px;color: white;">Impact</th>
+            <th style="padding: 6px;color: white;">Time Eastern</th>
+            <th style="padding: 6px;color: white;">Actual</th>
+            <th style="padding: 6px;color: white;">Forecast</th>
+            <th style="padding: 6px;color: white;">Previous</th>
+          </tr>
+        </thead>
+        <tbody>
+    
+     
+      
+          <!-- etc... -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  function changeStyle() {
+    document.getElementById('Symbol').style.color = 'black';
+  }
+  function changeStyle1() {
+    ;
+    document.getElementById('timeFrames').style.color = 'black';
+  }
+  function grapghParamiters() {
+
+    Symbol = document.getElementById('Symbol').value;
+    timeFrames = document.getElementById('timeFrames').value;
+    $.ajax({
+      url: '{% url "graph" %}',
+      data: {
+        'Symbol': Symbol,
+        'timeFrames': timeFrames,
+
+      },
+
+
+      success: function (data) {
+
+        document.getElementById('Symbol').style.color = 'white';
+        document.getElementById('timeFrames').style.color = 'white';
+      },
+      error: function () {
+
+      }
+    })
+  }
+
+  function Forecast(predict) {
+
+    Symbol = document.getElementById('Symbol').value;
+    timeFrames = document.getElementById('timeFrames').value;
+    $.ajax({
+      url: '{% url "Forecast" %}',
+      data: {
+        'Symbol': Symbol,
+        'timeFrames': timeFrames,
+        'predict': predict,
+      },
+
+      success: function () {
+
+      },
+      error: function () {
+
+    
+      }
+    })
+  }
+
+
+
+
+
+  $(document).ready(function () {
+    var refreshit = setInterval(getPrice, 100);
+  });
+
+
+  function getPrice() {
+    $.ajax({
+      url: '{% url "getPrice" %}',
+      data: '',
+      dataType: 'json',
+      success: function (data) {
+        EURUSD_BID_old_price = document.getElementById('EURUSD_BID').innerHTML;
+        EURUSD_ASK_old_price = document.getElementById('EURUSD_ASK').innerHTML;
+        GBPUSD_BID_old_price = document.getElementById('GBPUSD_BID').innerHTML;
+        GBPUSD_ASK_old_price = document.getElementById('GBPUSD_ASK').innerHTML;
+        USDCHF_BID_old_price = document.getElementById('USDCHF_BID').innerHTML;
+        USDCHF_ASK_old_price = document.getElementById('USDCHF_ASK').innerHTML;
+        USDJPY_BID_old_price = document.getElementById('USDJPY_BID').innerHTML;
+        USDJPY_ASK_old_price = document.getElementById('USDJPY_ASK').innerHTML;
+
+
+        if (data.all_Prices.EURUSD_Bid < EURUSD_BID_old_price) { document.getElementById('EURUSD_BID').style.color = 'red'; }
+        else if (data.all_Prices.EURUSD_Bid > EURUSD_BID_old_price) { document.getElementById('EURUSD_BID').style.color = 'blue'; }
+
+        if (data.all_Prices.EURUSD_Ask < EURUSD_ASK_old_price) { document.getElementById('EURUSD_ASK').style.color = 'red'; }
+        else if (data.all_Prices.EURUSD_Ask > EURUSD_ASK_old_price) { document.getElementById('EURUSD_ASK').style.color = 'blue'; }
+
+        if (data.all_Prices.GBPUSD_Bid < GBPUSD_BID_old_price) { document.getElementById('GBPUSD_BID').style.color = 'red'; }
+        else if (data.all_Prices.GBPUSD_Bid > GBPUSD_BID_old_price) { document.getElementById('GBPUSD_BID').style.color = 'blue'; }
+
+        if (data.all_Prices.GBPUSD_Ask < GBPUSD_ASK_old_price) { document.getElementById('GBPUSD_ASK').style.color = 'red'; }
+        else if (data.all_Prices.GBPUSD_Ask > GBPUSD_ASK_old_price) { document.getElementById('GBPUSD_ASK').style.color = 'blue'; }
+
+        if (data.all_Prices.USDCHF_Bid < USDCHF_BID_old_price) { document.getElementById('USDCHF_BID').style.color = 'red'; }
+        else if (data.all_Prices.USDCHF_Bid > USDCHF_BID_old_price) { document.getElementById('USDCHF_BID').style.color = 'blue'; }
+
+        if (data.all_Prices.USDCHF_Ask < USDCHF_ASK_old_price) { document.getElementById('USDCHF_ASK').style.color = 'red'; }
+        else if (data.all_Prices.USDCHF_Ask > USDCHF_ASK_old_price) { document.getElementById('USDCHF_ASK').style.color = 'blue'; }
+
+        if (data.all_Prices.USDJPY_Bid < USDJPY_BID_old_price) { document.getElementById('USDJPY_BID').style.color = 'red'; }
+        else if (data.all_Prices.USDJPY_Bid > USDJPY_BID_old_price) { document.getElementById('USDJPY_BID').style.color = 'blue'; }
+
+        if (data.all_Prices.USDJPY_Ask < USDJPY_ASK_old_price) { document.getElementById('USDJPY_ASK').style.color = 'red'; }
+        else if (data.all_Prices.USDJPY_Ask > USDJPY_ASK_old_price) { document.getElementById('USDJPY_ASK').style.color = 'blue'; }
+
+
+        document.getElementById('EURUSD_BID').innerHTML = data.all_Prices.EURUSD_Bid;
+        document.getElementById('EURUSD_ASK').innerHTML = data.all_Prices.EURUSD_Ask;
+        document.getElementById('GBPUSD_BID').innerHTML = data.all_Prices.GBPUSD_Bid;
+        document.getElementById('GBPUSD_ASK').innerHTML = data.all_Prices.GBPUSD_Ask;
+        document.getElementById('USDCHF_BID').innerHTML = data.all_Prices.USDCHF_Bid;
+        document.getElementById('USDCHF_ASK').innerHTML = data.all_Prices.USDCHF_Ask;
+        document.getElementById('USDJPY_BID').innerHTML = data.all_Prices.USDJPY_Bid;
+        document.getElementById('USDJPY_ASK').innerHTML = data.all_Prices.USDJPY_Ask;
+         // Login();
+      },
+      error: function () {
+        console.log("there is an error");
+      }
+    })
+
+  }
+
+
+  function newOrder(type) {
+    take_profit = document.getElementById('take_profit').value;
+    stop_loss = document.getElementById('stop_loss').value;
+    Deviation = document.getElementById('Deviation').value;
+    Volume = document.getElementById('Volume').value;
+    symbols = document.getElementById('symbols').value;
+
+    $.ajax({
+      url: '{% url "newOrder" %}',
+      data: {
+        'take_profit': take_profit,
+        'stop_loss': stop_loss,
+        'Deviation': Deviation,
+        'Volume': Volume,
+        'symbols': symbols,
+        'type': type
+      },
+
+      dataType: 'json',
+      success: function (data) {
+        document.getElementById('modal-wrapper').style.display='none';
+      },
+
+    })
+  }
+  function Login() {
+    username = document.getElementById('username').value;
+    password = document.getElementById('password').value;
+    $.ajax({
+      url: '{% url "Login" %}',
+      data: {
+        'username': username,
+        'password': password,
+      },
+
+      dataType: 'json',
+      success: function (data) {
+        document.getElementById('modal-wrapper3').style.display='none';
+        document.getElementById('login').innerHTML = data.account.UserName;
+        document.getElementById('balance').innerHTML = 'Balance :  ' + data.account.Balance;
+      },
+      error: function () {
+        alert('there is an error');
+      }
+    })
+  }
+  function AutoTrade() {
+    
+    auto_take_profit = document.getElementById('auto_take_profit').value;
+    auto_stop_loss = document.getElementById('auto_stop_loss').value;
+    auto_Deviation = document.getElementById('auto_Deviation').value;
+    auto_Volume = document.getElementById('auto_Volume').value;
+    auto_symbols = document.getElementById('auto_symbols').value;
+
+    $.ajax({
+      url: '{% url "autoTrade" %}',
+      data: {
+        'auto_take_profit': auto_take_profit,
+        'auto_stop_loss': auto_stop_loss,
+        'auto_Deviation': auto_Deviation,
+        'auto_Volume': auto_Volume,
+        'auto_symbols': auto_symbols,
+      },
+
+      
+      success: function (data) {
+        document.getElementById('modal-wrapper1').style.display='none';
+      },
+      error: function () {
+        alert("error");
+        document.getElementById('modal-wrapper1').style.display='none';
+      }
+    })
+  }
+  function getNews(){
+    document.getElementById('table-wrapper').style.display='block';   
+    $.ajax({
+      url: '{% url "getNews" %}',
+      data: '',
+      dataType: 'json',
+    success: function (data) {
+      for (i=0 ; i < data.News.Currency.length;i++){
+
+      $("#NewsTable").append('<tr><td>'+ data.News.Currency[i]   +'</td><td>'+ data.News.Event[i]   +'</td><td>'+ data.News.Impact[i]   +'</td><td>'+ data.News.Time_Eastern[i]   +'</td><td>'+ data.News.Actual[i]   +'</td><td>'+ data.News.Forecast[i]   +'</td><td>'+ data.News.Previous[i]   +'</td> </tr>');
+      }
+      },
+      error: function () {
+        alert("error");
+      }
+    })
+  }
+</script>
+<style>
+  #table-wrapper {
+    position: relative;
+  }
+
+  #table-scroll {
+    height: 150px;
+    overflow: auto;
+    margin-top: 20px;
+  }
+
+  #table-wrapper table {
+    width: 100%;
+
+  }
+
+  #table-wrapper table * {
+
+    color: black;
+  }
+</style>

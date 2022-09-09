@@ -1,0 +1,240 @@
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .left-nav{
+    background-color: rgba(241, 240, 246, 0.952);
+    margin-top: 71px;
+    width: 200px;
+    height: 570px;
+    overflow: scroll;
+    box-sizing: inherit;
+    position: fixed;
+    position: relative;
+    z-index: 4;
+ }
+h1{
+background-color: rgb(150, 24, 24);
+color: rgb(246, 245, 246);
+position: absolute;
+z-index: 2;
+  }
+
+  .nav-it{
+    display: block;
+   
+      background-color: rgba(27, 27, 27, 0.82); 
+      height: 60px;
+      
+      box-sizing: inherit;
+      width: 100%px ;
+      position: fixed;
+     
+    margin-top: -3px;
+      border-bottom-color: red;
+     border-width: thick;
+     border-style: solid;
+     position: relative;
+    z-index: 3;
+  }
+
+
+ .nav_item{
+     color: white;
+ }
+ .list{
+     margin-left: 320px;
+ }
+
+ .myDiv{
+   margin-left: 300px;
+   margin-top: -90px;
+ }
+
+ #t01{
+   border: none;
+   margin-top: 60px;
+   width:250px;
+   
+   margin-left: 20px;
+   
+ }
+
+
+ #t011{
+  border: none;
+height: 150px;
+}
+ th, td {
+  padding: 12px;
+  text-align: left;
+}
+ .syname{
+   color: rgb(170, 25, 25);
+ }
+ #t01 tr:nth-child(even) {
+  background-color: #eee;
+}
+#t01 tr:nth-child(odd) {
+ background-color: #fff;
+}
+#t01 th {
+  background-color: rgba(0, 0, 0, 0.62);
+  color: white;
+}
+#NewsTable tr:nth-child(even) {
+  background-color: #eee;
+}
+#NewsTable tr:nth-child(odd) {
+ background-color: #fff;
+}
+#NewsTable th {
+  background-color: rgba(0, 0, 0, 0.62);
+  color: white;
+}
+
+
+
+  
+ 
+    
+    .siteTitle{
+      margin-top: 30px;
+      font-family: Tahoma, Verdana, sans-serif;
+      font-style: italic;
+      position:relative;
+      z-index: 3;
+    }
+    #rcorners {
+      text-align: center;
+      border-radius: 30px ;
+        background: rgba(27, 27, 27, 0.82); ;
+        padding: 20px;
+        width: 100px;
+        height: 80px;
+        color: white;
+     
+    margin-left: 150px;
+        position:relative;
+        z-index: 2;
+        margin-bottom: 60px;
+    
+      }
+      .services{
+       
+        margin-top: 200px;
+        margin-left: 60px;
+      }
+      .news{
+        margin-top: 10px;
+      }
+
+        
+        /* Modal Content Box */
+        .modal-content {
+        background-color: #fefefe;
+        margin: 4% auto 15% auto;
+       
+        width: 10%;
+        padding-bottom: 30px;
+        }
+        
+        
+         
+        /* The Close Button (x) */
+        .close {
+          position: absolute;
+          right: -14px;
+          top: 100;
+          color: rgb(0, 0, 0);
+          font-size: 35px;
+          font-weight: bold;
+          top: -10px;
+        }
+        .close:hover,.close:focus {
+        color: red;
+        cursor: pointer;
+        }
+        
+        /* Add Zoom Animation */
+        .animate {
+        animation: zoom 0.6s
+        }
+        @keyframes zoom {
+        from {transform: scale(0)}
+        to {transform: scale(1)}
+        }
+        .container{
+          
+     background-color: rgba(163, 163, 163, 0.12);
+     border-width: thick;
+     border-style: solid;
+     border-color: rgba(0, 0, 0, 0.62);
+     width: 50%;
+        }
+        .cont{
+          margin-top: 50px;
+          margin-left: 50px;
+          height: 400px;
+        }
+        .cont1{
+          margin-top: 50px;
+          margin-left: 50px;
+          height: 450px;
+        }
+      .profit{
+        margin-top: 20px;
+        margin-left: 20px;
+        
+      }
+
+      .profit1{
+        width: 80px;
+      }
+     h3{
+       margin-left: 150px;
+       margin-top: 40px;
+     }
+     .order_btn{
+       width: 200px;
+     }
+     .exit{
+       background-color: rgba(0, 0, 0, 0.62);
+     }
+     .input_std {
+      margin-bottom: 10px;
+      width: auto;
+      display: block;
+      border: none;
+      border-bottom: 1px solid #999;
+      padding: 6px 30px;
+      font-family: Poppins;
+      box-sizing: border-box;
+      background : none;
+    }
+    
+    #table-wrapper {
+      position:relative;
+    }
+    #table-scroll {
+      height:150px;
+      overflow:auto;  
+      margin-top:20px;
+    }
+    #table-wrapper table {
+      width:100%;
+    
+    }
+    #table-wrapper table * {
+     
+      color:black;
+    }
+    #table-wrapper table thead th .text {
+      position:absolute;   
+      top:-20px;
+      z-index:2;
+      height:20px;
+      width:35%;
+      border:1px solid red;
+    }
